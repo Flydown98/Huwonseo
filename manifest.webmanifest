@@ -1,14 +1,1 @@
-{
-  "name": "남양주시장애인복지관 전자 기탁서",
-  "short_name": "전자기탁서",
-  "description": "기탁서 작성, 전자서명, PDF 저장을 위한 오프라인 지원 웹앱",
-  "start_url": "./",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#f4f6f9",
-  "theme_color": "#183153",
-  "icons": [
-    {"src":"icons/icon-192.png","sizes":"192x192","type":"image/png"},
-    {"src":"icons/icon-512.png","sizes":"512x512","type":"image/png"}
-  ]
-}
+{"name":"남양주시장애인복지관 전자 기탁서","short_name":"전자기탁서","start_url":"./","scope":"./","display":"standalone","background_color":"#f3f5f7","theme_color":"#ffffff","icons":[{"src":"./icons/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
