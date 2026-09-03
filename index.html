@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#183153" />
+  <meta name="description" content="남양주시장애인복지관 전자 기탁서 작성·서명 앱" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>남양주시장애인복지관 전자 기탁서</title>
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <strong>남양주시장애인복지관</strong>
+      <span>전자 기탁서</span>
+    </div>
+    <button id="installBtn" class="ghost" hidden>앱 설치</button>
+  </header>
+
+  <main id="app" class="container">
+    <section id="homeView" class="view active">
+      <div class="hero card">
+        <p class="eyebrow">DONATION FORM</p>
+        <h1>전자 기탁서 작성</h1>
+        <p>기탁 유형을 선택한 뒤 태블릿에서 내용을 입력하고 펜으로 서명해 주세요.</p>
+      </div>
+
+      <div class="form-grid">
+        <button class="type-card" data-type="general"><span>💰</span><b>비지정후원금</b><small>비지정후원금 기탁서</small></button>
+        <button class="type-card" data-type="designated"><span>🎯</span><b>지정후원금</b><small>지정후원금 기탁서</small></button>
+        <button class="type-card" data-type="goods"><span>🎁</span><b>현물 기탁</b><small>현물 기탁신청서</small></button>
+        <button class="type-card" data-type="cms"><span>🏦</span><b>CMS 후원</b><small>비지정 기탁서 + CMS 신청서 묶음</small></button>
+      </div>
+
+      <div class="card info-card">
+        <b>개인정보 저장 방식</b>
+        <p>작성 정보는 GitHub로 전송하지 않습니다. 완료된 신청서는 이 기기 내부 앱 저장소에 보관되고 PDF로 내려받을 수 있습니다.</p>
+      </div>
+
+      <div class="section-head">
+        <h2>이 기기에 저장된 신청서</h2>
+        <button id="refreshSavedBtn" class="ghost">새로고침</button>
+      </div>
+      <div id="savedList" class="saved-list"></div>
+    </section>
+
+    <section id="formView" class="view">
+      <div class="section-head sticky-head">
+        <button id="backBtn" class="ghost">← 처음으로</button>
+        <div>
+          <h2 id="formTitle">기탁서 작성</h2>
+          <p id="formSub"></p>
+        </div>
+      </div>
+
+      <form id="donationForm" autocomplete="off">
+        <div id="dynamicFields"></div>
+
+        <section class="card">
+          <h3>개인정보 및 고유식별정보 동의</h3>
+          <p class="notice">기존 기탁서의 개인정보 수집·이용, 제3자 제공, 고유식별번호 수집·이용 및 제3자 제공 동의 항목을 확인합니다.</p>
+          <label class="check-row"><input type="checkbox" name="consentPrivacy" required /> 개인정보 수집·이용에 동의합니다.</label>
+          <label class="check-row"><input type="checkbox" name="consentThird" required /> 개인정보 제3자 제공·이용에 동의합니다.</label>
+          <label class="check-row"><input type="checkbox" name="consentId" /> 고유식별번호(주민등록번호) 수집·이용에 동의합니다. <small>(해당 시)</small></label>
+          <label class="check-row"><input type="checkbox" name="consentIdThird" /> 고유식별번호 제3자 제공·이용에 동의합니다. <small>(해당 시)</small></label>
+        </section>
+
+        <section class="card">
+          <div class="section-head">
+            <div>
+              <h3>기부자 서명</h3>
+              <p class="notice">S Pen, 스타일러스 또는 손가락으로 아래 칸에 서명해 주세요.</p>
+            </div>
+            <button type="button" id="clearSignBtn" class="ghost">다시 서명</button>
+          </div>
+          <div class="signature-wrap"><canvas id="signatureCanvas"></canvas></div>
+          <p id="signError" class="error" hidden>서명을 입력해 주세요.</p>
+        </section>
+
+        <section class="card complete-card">
+          <label class="check-row"><input type="checkbox" name="finalConfirm" required /> 입력 내용과 동의사항을 확인했으며 위 내용으로 신청합니다.</label>
+          <button type="submit" id="completeBtn" class="primary large">작성 완료 · PDF 저장</button>
+          <p class="notice center">CMS 후원은 비지정후원금 기탁서와 CMS 신청서가 하나의 PDF로 생성됩니다.</p>
+        </section>
+      </form>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
